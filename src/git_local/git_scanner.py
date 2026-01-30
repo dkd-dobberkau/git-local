@@ -31,6 +31,7 @@ class RepoInfo:
     last_commit_date: datetime
     last_commit_relative: str
     remote_url: str | None
+    is_ddev: bool = False
 
 
 def get_relative_time(dt: datetime) -> str:
@@ -104,6 +105,9 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
     except AttributeError:
         pass
 
+    # Check for DDEV project
+    is_ddev = (repo_path / ".ddev").is_dir()
+
     return RepoInfo(
         name=repo_path.name,
         path=str(repo_path),
@@ -115,6 +119,7 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
         last_commit_date=last_commit_date,
         last_commit_relative=last_commit_relative,
         remote_url=remote_url,
+        is_ddev=is_ddev,
     )
 
 

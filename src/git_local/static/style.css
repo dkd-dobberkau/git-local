@@ -184,9 +184,30 @@ body {
 }
 
 .repo-item-name {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   font-size: var(--font-size-base);
   font-weight: 600;
   margin-bottom: var(--space-xs);
+}
+
+/* --------------------------------------------------------------------------
+   Badges
+   -------------------------------------------------------------------------- */
+.badge {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 2px 6px;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-fg-muted);
+}
+
+.badge-ddev {
+  border-color: var(--color-fg);
+  color: var(--color-fg);
 }
 
 .repo-item-meta {
