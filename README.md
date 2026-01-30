@@ -33,7 +33,8 @@ uv sync
 ## Usage
 
 ```bash
-./start.sh
+./start.sh   # Start server
+./stop.sh    # Stop server
 ```
 
 Or manually:
