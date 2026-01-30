@@ -48,11 +48,11 @@ Open http://localhost:1899
 ### Docker
 
 ```bash
+# Configure (copy and edit .env)
+cp .env.example .env
+
 # Build and run
 docker compose up -d
-
-# Custom repository path
-REPO_PATH=/path/to/repos docker compose up -d
 
 # Stop
 docker compose down
