@@ -9,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
 from git_local.config import REPO_BASE_PATH, APP_TITLE, HOST, PORT
-from git_local.git_scanner import scan_repositories, get_repo_info
+from git_local.git_scanner import scan_repositories, clear_cache
 
 app = FastAPI(title=APP_TITLE)
 
@@ -42,8 +42,8 @@ async def index(request: Request):
 
 @app.get("/partials/repos", response_class=HTMLResponse)
 async def repos_partial(request: Request):
-    """HTMX partial for repository list."""
-    repos = scan_repositories(REPO_BASE_PATH)
+    """HTMX partial for repository list (force refresh)."""
+    repos = scan_repositories(REPO_BASE_PATH, force_refresh=True)
     return templates.TemplateResponse(
         "components/repo_list.html",
         {

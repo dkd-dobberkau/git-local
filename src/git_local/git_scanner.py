@@ -3,8 +3,18 @@
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from threading import Lock
+from time import time
 
 from git import Repo, InvalidGitRepositoryError
+
+
+# Cache configuration
+CACHE_TTL_SECONDS = 30
+
+# Cache storage
+_cache: dict[str, tuple[float, list["RepoInfo"]]] = {}
+_cache_lock = Lock()
 
 
 @dataclass
@@ -108,8 +118,28 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
     )
 
 
-def scan_repositories(base_path: str) -> list[RepoInfo]:
-    """Scan directory for Git repositories."""
+def scan_repositories(base_path: str, force_refresh: bool = False) -> list[RepoInfo]:
+    """Scan directory for Git repositories with caching.
+
+    Args:
+        base_path: Directory to scan for Git repositories
+        force_refresh: If True, bypass cache and rescan
+
+    Returns:
+        List of RepoInfo objects sorted by last commit date
+    """
+    global _cache
+
+    now = time()
+
+    # Check cache (thread-safe)
+    with _cache_lock:
+        if not force_refresh and base_path in _cache:
+            cache_time, cached_repos = _cache[base_path]
+            if now - cache_time < CACHE_TTL_SECONDS:
+                return cached_repos
+
+    # Scan repositories
     base = Path(base_path)
     repos = []
 
@@ -122,4 +152,15 @@ def scan_repositories(base_path: str) -> list[RepoInfo]:
     # Sort by last commit date (newest first)
     repos.sort(key=lambda r: r.last_commit_date, reverse=True)
 
+    # Update cache (thread-safe)
+    with _cache_lock:
+        _cache[base_path] = (now, repos)
+
     return repos
+
+
+def clear_cache() -> None:
+    """Clear the repository cache."""
+    global _cache
+    with _cache_lock:
+        _cache.clear()
