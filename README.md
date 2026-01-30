@@ -1,6 +1,6 @@
 # git-local
 
-A local GitLab-style web interface for browsing Git repositories.
+A local web interface for browsing and managing Git repositories.
 
 ## Features
 
@@ -25,7 +25,7 @@ A local GitLab-style web interface for browsing Git repositories.
 ## Installation
 
 ```bash
-git clone https://github.com/your-username/git-local.git
+git clone https://github.com/dkd-dobberkau/git-local.git
 cd git-local
 uv sync
 ```
