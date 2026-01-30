@@ -33,6 +33,7 @@ class RepoInfo:
     remote_url: str | None
     is_ddev: bool = False
     is_docker: bool = False
+    is_python: bool = False
 
 
 def get_relative_time(dt: datetime) -> str:
@@ -119,6 +120,15 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
     ]
     is_docker = any((repo_path / f).is_file() for f in docker_files)
 
+    # Check for Python project
+    python_files = [
+        "pyproject.toml",
+        "setup.py",
+        "requirements.txt",
+        "Pipfile",
+    ]
+    is_python = any((repo_path / f).is_file() for f in python_files)
+
     return RepoInfo(
         name=repo_path.name,
         path=str(repo_path),
@@ -132,6 +142,7 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
         remote_url=remote_url,
         is_ddev=is_ddev,
         is_docker=is_docker,
+        is_python=is_python,
     )
 
 

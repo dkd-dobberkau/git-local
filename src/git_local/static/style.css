@@ -215,6 +215,11 @@ body {
   color: var(--color-fg-subtle);
 }
 
+.badge-python {
+  border-color: var(--color-fg-muted);
+  color: var(--color-fg-muted);
+}
+
 .repo-item-meta {
   display: flex;
   flex-wrap: wrap;
