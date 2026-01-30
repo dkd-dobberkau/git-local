@@ -46,10 +46,10 @@
 }
 
 /* --------------------------------------------------------------------------
-   Dark Mode
+   Dark Mode (auto via system preference)
    -------------------------------------------------------------------------- */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not(.light) {
     --color-bg: #0d0d0d;
     --color-bg-elevated: #1a1a1a;
     --color-bg-muted: #252525;
@@ -60,6 +60,21 @@
     --color-border: #333;
     --color-border-strong: #555;
   }
+}
+
+/* --------------------------------------------------------------------------
+   Dark Mode (manual toggle)
+   -------------------------------------------------------------------------- */
+body.dark {
+  --color-bg: #0d0d0d;
+  --color-bg-elevated: #1a1a1a;
+  --color-bg-muted: #252525;
+  --color-fg: #f0f0f0;
+  --color-fg-muted: #c0c0c0;
+  --color-fg-subtle: #a0a0a0;
+  --color-fg-faint: #808080;
+  --color-border: #333;
+  --color-border-strong: #555;
 }
 
 /* --------------------------------------------------------------------------
@@ -117,7 +132,14 @@ body {
 }
 
 .header-left {
-  width: 40px;
+  display: flex;
+  align-items: center;
+}
+
+#lang-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 .header-title {
