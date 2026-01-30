@@ -96,7 +96,7 @@ body {
 }
 
 .main {
-  max-width: 720px;
+  max-width: 960px;
   margin: 0 auto;
   padding: var(--space-lg);
 }
@@ -116,11 +116,16 @@ body {
   z-index: 100;
 }
 
+.header-left {
+  width: 40px;
+}
+
 .header-title {
   font-size: var(--font-size-sm);
   font-weight: 700;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  text-align: center;
 }
 
 .header-actions {
@@ -218,6 +223,11 @@ body {
 .badge-python {
   border-color: var(--color-fg-muted);
   color: var(--color-fg-muted);
+}
+
+.badge-node {
+  border-color: var(--color-fg-faint);
+  color: var(--color-fg-faint);
 }
 
 .repo-item-meta {

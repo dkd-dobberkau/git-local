@@ -34,6 +34,7 @@ class RepoInfo:
     is_ddev: bool = False
     is_docker: bool = False
     is_python: bool = False
+    is_node: bool = False
 
 
 def get_relative_time(dt: datetime) -> str:
@@ -129,6 +130,9 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
     ]
     is_python = any((repo_path / f).is_file() for f in python_files)
 
+    # Check for Node.js project
+    is_node = (repo_path / "package.json").is_file()
+
     return RepoInfo(
         name=repo_path.name,
         path=str(repo_path),
@@ -143,6 +147,7 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
         is_ddev=is_ddev,
         is_docker=is_docker,
         is_python=is_python,
+        is_node=is_node,
     )
 
 
