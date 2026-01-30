@@ -21,10 +21,44 @@
 </header>
 
 <main class="main">
-  <div class="repo-count">{{ repo_count }} Repositories</div>
+  <div class="filter-bar">
+    <input
+      type="text"
+      class="filter-input"
+      placeholder="Filter..."
+      oninput="filterRepos(this.value)"
+    >
+    <span class="repo-count"><span id="visible-count">{{ repo_count }}</span> / {{ repo_count }} Repositories</span>
+  </div>
 
   <div id="repo-list">
     {% include "components/repo_list.html" %}
   </div>
 </main>
+
+<script>
+function filterRepos(query) {
+  const items = document.querySelectorAll('.repo-item');
+  const q = query.toLowerCase();
+  let visible = 0;
+
+  items.forEach(item => {
+    const name = item.querySelector('.repo-item-name').textContent.toLowerCase();
+    const badges = item.querySelectorAll('.badge');
+    let badgeMatch = false;
+    badges.forEach(b => {
+      if (b.textContent.toLowerCase().includes(q)) badgeMatch = true;
+    });
+
+    if (name.includes(q) || badgeMatch) {
+      item.style.display = '';
+      visible++;
+    } else {
+      item.style.display = 'none';
+    }
+  });
+
+  document.getElementById('visible-count').textContent = visible;
+}
+</script>
 {% endblock %}

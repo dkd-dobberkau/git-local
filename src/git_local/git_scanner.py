@@ -35,6 +35,7 @@ class RepoInfo:
     is_docker: bool = False
     is_python: bool = False
     is_node: bool = False
+    is_php: bool = False
 
 
 def get_relative_time(dt: datetime) -> str:
@@ -133,6 +134,9 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
     # Check for Node.js project
     is_node = (repo_path / "package.json").is_file()
 
+    # Check for PHP project
+    is_php = (repo_path / "composer.json").is_file()
+
     return RepoInfo(
         name=repo_path.name,
         path=str(repo_path),
@@ -148,6 +152,7 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
         is_docker=is_docker,
         is_python=is_python,
         is_node=is_node,
+        is_php=is_php,
     )
 
 

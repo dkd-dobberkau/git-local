@@ -22,9 +22,9 @@
   --color-bg-elevated: var(--white);
   --color-bg-muted: var(--gray-100);
   --color-fg: var(--black);
-  --color-fg-muted: var(--gray-600);
-  --color-fg-subtle: var(--gray-500);
-  --color-fg-faint: var(--gray-400);
+  --color-fg-muted: var(--gray-700);
+  --color-fg-subtle: var(--gray-600);
+  --color-fg-faint: var(--gray-500);
   --color-border: var(--gray-200);
   --color-border-strong: var(--gray-400);
 
@@ -54,9 +54,9 @@
     --color-bg-elevated: #1a1a1a;
     --color-bg-muted: #252525;
     --color-fg: #f0f0f0;
-    --color-fg-muted: #b0b0b0;
-    --color-fg-subtle: #888;
-    --color-fg-faint: #666;
+    --color-fg-muted: #c0c0c0;
+    --color-fg-subtle: #a0a0a0;
+    --color-fg-faint: #808080;
     --color-border: #333;
     --color-border-strong: #555;
   }
@@ -227,6 +227,42 @@ body {
 
 .badge-node {
   border-color: var(--color-fg-faint);
+  color: var(--color-fg-faint);
+}
+
+.badge-php {
+  border-color: var(--color-fg-subtle);
+  color: var(--color-fg-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   Filter Bar
+   -------------------------------------------------------------------------- */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.filter-input {
+  flex: 1;
+  height: 40px;
+  padding: 0 var(--space-md);
+  font-family: inherit;
+  font-size: var(--font-size-sm);
+  color: var(--color-fg);
+  background: var(--color-bg);
+  border: var(--border);
+  transition: border-color var(--transition);
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: var(--color-fg);
+}
+
+.filter-input::placeholder {
   color: var(--color-fg-faint);
 }
 
