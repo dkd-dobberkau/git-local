@@ -28,6 +28,11 @@
       placeholder="Filter..."
       oninput="filterRepos(this.value)"
     >
+    <div class="sort-buttons">
+      <button class="sort-btn active" onclick="sortRepos('date')" title="Nach Datum">Datum</button>
+      <button class="sort-btn" onclick="sortRepos('name')" title="Alphabetisch">A-Z</button>
+      <button class="sort-btn" onclick="sortRepos('remote')" title="Nach Remote">Remote</button>
+    </div>
     <span class="repo-count"><span id="visible-count">{{ repo_count }}</span> / {{ repo_count }} Repositories</span>
   </div>
 
@@ -59,6 +64,29 @@ function filterRepos(query) {
   });
 
   document.getElementById('visible-count').textContent = visible;
+}
+
+function sortRepos(by) {
+  const list = document.querySelector('.repo-list');
+  const items = Array.from(list.querySelectorAll('.repo-item'));
+
+  // Update active button
+  document.querySelectorAll('.sort-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  items.sort((a, b) => {
+    if (by === 'name') {
+      return a.dataset.name.localeCompare(b.dataset.name);
+    } else if (by === 'date') {
+      return parseFloat(b.dataset.date) - parseFloat(a.dataset.date);
+    } else if (by === 'remote') {
+      const remoteA = a.dataset.remote || 'zzz';
+      const remoteB = b.dataset.remote || 'zzz';
+      return remoteA.localeCompare(remoteB);
+    }
+  });
+
+  items.forEach(item => list.appendChild(item));
 }
 </script>
 {% endblock %}

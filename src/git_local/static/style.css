@@ -240,6 +240,11 @@ body {
   color: var(--color-fg-muted);
 }
 
+.badge-rust {
+  border-color: var(--color-fg);
+  color: var(--color-fg);
+}
+
 /* --------------------------------------------------------------------------
    Filter Bar
    -------------------------------------------------------------------------- */
@@ -269,6 +274,33 @@ body {
 
 .filter-input::placeholder {
   color: var(--color-fg-faint);
+}
+
+.sort-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.sort-btn {
+  padding: 0 var(--space-sm);
+  height: 32px;
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  color: var(--color-fg-muted);
+  background: var(--color-bg-muted);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.sort-btn:hover {
+  background: var(--color-border);
+  color: var(--color-fg);
+}
+
+.sort-btn.active {
+  background: var(--color-fg);
+  color: var(--color-bg);
 }
 
 .repo-item-meta {

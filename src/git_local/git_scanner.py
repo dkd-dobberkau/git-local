@@ -37,6 +37,7 @@ class RepoInfo:
     is_node: bool = False
     is_php: bool = False
     is_go: bool = False
+    is_rust: bool = False
 
 
 def get_relative_time(dt: datetime) -> str:
@@ -141,6 +142,9 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
     # Check for Go project
     is_go = (repo_path / "go.mod").is_file()
 
+    # Check for Rust project
+    is_rust = (repo_path / "Cargo.toml").is_file()
+
     return RepoInfo(
         name=repo_path.name,
         path=str(repo_path),
@@ -158,6 +162,7 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
         is_node=is_node,
         is_php=is_php,
         is_go=is_go,
+        is_rust=is_rust,
     )
 
 
