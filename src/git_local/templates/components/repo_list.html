@@ -2,7 +2,7 @@
   {% for repo in repos %}
   <div class="repo-item">
     <div class="repo-item-content">
-      <div class="repo-item-name">{{ repo.name }}{% if repo.is_ddev %}<span class="badge badge-ddev">DDEV</span>{% endif %}</div>
+      <div class="repo-item-name">{{ repo.name }}{% if repo.is_ddev %}<span class="badge badge-ddev">DDEV</span>{% elif repo.is_docker %}<span class="badge badge-docker">Docker</span>{% endif %}</div>
       <div class="repo-item-meta">
         <span class="repo-item-branch">{{ repo.branch }}</span>
         <span class="repo-item-status {% if repo.is_dirty %}dirty{% endif %}">

@@ -32,6 +32,7 @@ class RepoInfo:
     last_commit_relative: str
     remote_url: str | None
     is_ddev: bool = False
+    is_docker: bool = False
 
 
 def get_relative_time(dt: datetime) -> str:
@@ -108,6 +109,16 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
     # Check for DDEV project
     is_ddev = (repo_path / ".ddev").is_dir()
 
+    # Check for Docker project
+    docker_files = [
+        "docker-compose.yml",
+        "docker-compose.yaml",
+        "compose.yml",
+        "compose.yaml",
+        "Dockerfile",
+    ]
+    is_docker = any((repo_path / f).is_file() for f in docker_files)
+
     return RepoInfo(
         name=repo_path.name,
         path=str(repo_path),
@@ -120,6 +131,7 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
         last_commit_relative=last_commit_relative,
         remote_url=remote_url,
         is_ddev=is_ddev,
+        is_docker=is_docker,
     )
 
 

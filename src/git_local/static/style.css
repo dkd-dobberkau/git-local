@@ -210,6 +210,11 @@ body {
   color: var(--color-fg);
 }
 
+.badge-docker {
+  border-color: var(--color-fg-subtle);
+  color: var(--color-fg-subtle);
+}
+
 .repo-item-meta {
   display: flex;
   flex-wrap: wrap;
