@@ -31,6 +31,7 @@ COPY --chown=appuser:appuser src/ ./src/
 USER appuser
 
 ENV PATH="/app/.venv/bin:$PATH"
+ENV PYTHONPATH="/app/src"
 ENV PYTHONUNBUFFERED=1
 
 EXPOSE 1899
