@@ -9,8 +9,8 @@ RUN pip install --no-cache-dir uv
 # Copy dependency files
 COPY pyproject.toml uv.lock ./
 
-# Install dependencies
-RUN uv sync --no-dev --frozen
+# Install dependencies only (not the local package)
+RUN uv sync --no-dev --frozen --no-install-project
 
 FROM python:3.11-slim
 
