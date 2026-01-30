@@ -1,0 +1,17 @@
+services:
+  git-local:
+    build: .
+    container_name: git-local
+    ports:
+      - "1899:1899"
+    volumes:
+      # Mount your repositories directory (read-only)
+      - ${REPO_PATH:-/Users/olivier/Versioncontrol/local}:/repos:ro
+    environment:
+      - REPO_BASE_PATH=/repos
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:1899/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

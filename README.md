@@ -19,8 +19,8 @@ A local web interface for browsing and managing Git repositories.
 
 ## Requirements
 
-- Python 3.11+
-- [uv](https://github.com/astral-sh/uv) package manager
+- Python 3.11+ and [uv](https://github.com/astral-sh/uv), or
+- Docker
 
 ## Installation
 
@@ -45,12 +45,28 @@ uv run uvicorn git_local.main:app --host 127.0.0.1 --port 1899
 
 Open http://localhost:1899
 
+### Docker
+
+```bash
+# Build and run
+docker compose up -d
+
+# Custom repository path
+REPO_PATH=/path/to/repos docker compose up -d
+
+# Stop
+docker compose down
+```
+
 ## Configuration
 
-Edit `src/git_local/config.py` to change:
+Set via environment variables or edit `src/git_local/config.py`:
 
-- `REPO_BASE_PATH` – Directory to scan (default: `/Users/olivier/Versioncontrol/local`)
-- `PORT` – Server port (default: `1899`)
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `REPO_BASE_PATH` | Directory to scan | `/Users/olivier/Versioncontrol/local` |
+| `PORT` | Server port | `1899` |
+| `HOST` | Server host | `127.0.0.1` |
 
 ## Tech Stack
 
