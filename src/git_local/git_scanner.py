@@ -38,6 +38,7 @@ class RepoInfo:
     is_php: bool = False
     is_go: bool = False
     is_rust: bool = False
+    is_typo3: bool = False
 
 
 def get_relative_time(dt: datetime) -> str:
@@ -145,6 +146,13 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
     # Check for Rust project
     is_rust = (repo_path / "Cargo.toml").is_file()
 
+    # Check for TYPO3 project
+    is_typo3 = (
+        (repo_path / "typo3conf").is_dir()
+        or (repo_path / "public" / "typo3conf").is_dir()
+        or (repo_path / "packages").is_dir()  # TYPO3 extension development
+    )
+
     return RepoInfo(
         name=repo_path.name,
         path=str(repo_path),
@@ -163,6 +171,7 @@ def get_repo_info(repo_path: Path) -> RepoInfo | None:
         is_php=is_php,
         is_go=is_go,
         is_rust=is_rust,
+        is_typo3=is_typo3,
     )
 
 
@@ -197,8 +206,8 @@ def scan_repositories(base_path: str, force_refresh: bool = False) -> list[RepoI
             if repo_info:
                 repos.append(repo_info)
 
-    # Sort by last commit date (newest first)
-    repos.sort(key=lambda r: r.last_commit_date, reverse=True)
+    # Sort alphabetically by name
+    repos.sort(key=lambda r: r.name.lower())
 
     # Update cache (thread-safe)
     with _cache_lock:

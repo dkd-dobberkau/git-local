@@ -245,6 +245,11 @@ body {
   color: var(--color-fg);
 }
 
+.badge-typo3 {
+  border-color: var(--color-fg);
+  color: var(--color-fg);
+}
+
 /* --------------------------------------------------------------------------
    Filter Bar
    -------------------------------------------------------------------------- */
@@ -336,6 +341,21 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.repo-item-remote {
+  font-size: var(--font-size-xs);
+  margin-top: 2px;
+}
+
+.repo-item-remote a {
+  color: var(--color-fg-subtle);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.repo-item-remote a:hover {
+  color: var(--color-fg);
 }
 
 /* --------------------------------------------------------------------------

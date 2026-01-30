@@ -29,8 +29,8 @@
       oninput="filterRepos(this.value)"
     >
     <div class="sort-buttons">
-      <button class="sort-btn active" onclick="sortRepos('date')" title="Nach Datum">Datum</button>
-      <button class="sort-btn" onclick="sortRepos('name')" title="Alphabetisch">A-Z</button>
+      <button class="sort-btn" onclick="sortRepos('date')" title="Nach Datum">Datum</button>
+      <button class="sort-btn active" onclick="sortRepos('name')" title="Alphabetisch">A-Z</button>
       <button class="sort-btn" onclick="sortRepos('remote')" title="Nach Remote">Remote</button>
     </div>
     <span class="repo-count"><span id="visible-count">{{ repo_count }}</span> / {{ repo_count }} Repositories</span>

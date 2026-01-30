@@ -2,7 +2,7 @@
   {% for repo in repos %}
   <div class="repo-item" data-name="{{ repo.name|lower }}" data-date="{{ repo.last_commit_date.timestamp() }}" data-remote="{{ repo.remote_url or '' }}">
     <div class="repo-item-content">
-      <div class="repo-item-name">{{ repo.name }}{% if repo.is_ddev %}<span class="badge badge-ddev">DDEV</span>{% endif %}{% if repo.is_docker and not repo.is_ddev %}<span class="badge badge-docker">Docker</span>{% endif %}{% if repo.is_python %}<span class="badge badge-python">Python</span>{% endif %}{% if repo.is_node %}<span class="badge badge-node">Node</span>{% endif %}{% if repo.is_php %}<span class="badge badge-php">PHP</span>{% endif %}{% if repo.is_go %}<span class="badge badge-go">Go</span>{% endif %}{% if repo.is_rust %}<span class="badge badge-rust">Rust</span>{% endif %}</div>
+      <div class="repo-item-name">{{ repo.name }}{% if repo.is_ddev %}<span class="badge badge-ddev">DDEV</span>{% endif %}{% if repo.is_docker and not repo.is_ddev %}<span class="badge badge-docker">Docker</span>{% endif %}{% if repo.is_python %}<span class="badge badge-python">Python</span>{% endif %}{% if repo.is_node %}<span class="badge badge-node">Node</span>{% endif %}{% if repo.is_php %}<span class="badge badge-php">PHP</span>{% endif %}{% if repo.is_go %}<span class="badge badge-go">Go</span>{% endif %}{% if repo.is_rust %}<span class="badge badge-rust">Rust</span>{% endif %}{% if repo.is_typo3 %}<span class="badge badge-typo3">TYPO3</span>{% endif %}</div>
       <div class="repo-item-meta">
         <span class="repo-item-branch">{{ repo.branch }}</span>
         <span class="repo-item-status {% if repo.is_dirty %}dirty{% endif %}">
@@ -13,6 +13,11 @@
       <div class="repo-item-commit">
         "{{ repo.last_commit_message }}" · {{ repo.last_commit_relative }}
       </div>
+      {% if repo.remote_url %}
+      <div class="repo-item-remote">
+        <a href="{{ repo.remote_url | replace('git@github.com:', 'https://github.com/') | replace('git@gitlab.com:', 'https://gitlab.com/') | replace('.git', '') }}" target="_blank" rel="noopener">{{ repo.remote_url | replace('git@github.com:', '') | replace('git@gitlab.com:', '') | replace('.git', '') | replace('https://github.com/', '') | replace('https://gitlab.com/', '') }}</a>
+      </div>
+      {% endif %}
     </div>
     <div class="repo-item-actions">
       <button
